@@ -7,3 +7,7 @@ O presente projeto é uma versão do repositório de Celso Henrique. Repositóri
 4. Criação de um botão estilizado para exibição na tela principal. Adicionado o teste para verificar se o botão exibido na tela e se está chamando uma função e também foi feita a tipagem para aceitar somente funções na propriedade onUpdate no arquivo Quotes.
 5. Criação de um teste da ligação entre a aplicação e a API que fornece as frases para exibir na tela. E tambem foi criado um arquivo .env para a variável de ambiente REACT_APP_API
 6. Feita a integração com a API onde estão as frases que são exibidas na tela assim como o teste para integração da mesma. Usamos também componente que mudam de estado com a função onUpdate no App. Repositório de onde encontrá-la <a href="https://github.com/celso-henrique/naruto-quotes-server">naruto-quotes-server</a>. É necessário ter python para executá-la.
+7. Adicionado audio sempre que uma frase é mostrada na tela. Inclusão na verificação do teste para não mudar o estado de um componente desmontado. Trazer uma mensagem no primeiro carregamento do site.
+
+## Report
+* jsdomnão oferece suporte a nenhuma operação de carregamento ou reprodução de mídia por isso adicionei a linha ` window.HTMLMediaElement.prototype.play = () => { /* do nothing */ }; ` no arquivo de teste no App para suprimir a mensagem de erro de não ter uma implementação.

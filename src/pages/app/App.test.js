@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { App } from './App';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
 
 const response = { speaker: "Speaker", quote: 'test quote'};
 
@@ -19,7 +20,7 @@ test('renders the app with a button and a quote', () => {
     
     const buttonEL = screen.getByRole('button');
     const imageEL = screen.getByRole('img');
-    const textEL = screen.getByText(/Speaker/);
+    const textEL = screen.getByText(/loading speaker/);
 
     expect(buttonEL).toBeInTheDocument();
     expect(imageEL).toBeInTheDocument();
@@ -32,6 +33,14 @@ test('calls api on button click and update its text', async () => {
     const buttonEL = screen.getByRole('button');
     fireEvent.click(buttonEL);
 
+    const quoteEL = await screen.findByText(response.quote);
+
+    expect(quoteEL).toBeInTheDocument();
+})
+
+test('calls api on startup and renders it response', async ()=> {
+    render(<App />);
+    
     const quoteEL = await screen.findByText(response.quote);
 
     expect(quoteEL).toBeInTheDocument();
